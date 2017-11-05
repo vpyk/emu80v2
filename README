@@ -8,3 +8,5 @@ For license info, see the file "COPYING"
 Сборка под DOS:
  - cd SRC
  - make
+
+Утилиты компилировались в Borland C++ версий 3.1 и 4.5 под Win32 или DOS.
