@@ -1,0 +1,56 @@
+.AUTODEPEND
+
+CDIR = i:\bc31
+ASMDIR = i:\tasm
+
+OBJECTS = loader.obj emurom.obj misc.obj emuio.obj emucpu.obj interf.obj int09.obj symgen.obj filelst.obj main.obj graph.obj sb.obj
+SOBJECTS = loader emurom misc emuio emucpu interf int09 filelst main graph sb symgen
+
+CC = $(CDIR)\bin\bcc.exe
+ASM = $(ASMDIR)\bin\tasm.exe
+
+LIBPATH = $(CDIR)\lib
+INCPATH = $(CDIR)\include
+
+TASM_OPT = /m5 /mx
+TLINK_OPT = /t
+BCC_OPT = -c -mt -O1 -Oc -d -u-
+
+emu80.com: $(OBJECTS)
+ tlink /L$(LIBPATH) c0t.obj $(SOBJECTS),emu80.com,,cs.lib $(TLINK_OPT)
+
+loader.obj: loader.asm
+ tasm loader.asm $(TASM_OPT)
+
+emurom.obj: emurom.asm
+ tasm emurom.asm $(TASM_OPT)
+
+misc.obj: misc.asm
+ tasm misc.asm $(TASM_OPT)
+
+emuio.obj: emucpu.asm
+ tasm emuio.asm $(TASM_OPT)
+
+int09.obj: int09.asm
+ tasm int09.asm $(TASM_OPT)
+
+emucpu.obj: emucpu.asm
+ tasm emucpu.asm $(TASM_OPT)
+
+interf.obj: interf.asm
+ tasm interf.asm $(TASM_OPT)
+
+filelst.obj: filelst.asm
+ tasm filelst.asm $(TASM_OPT)
+
+main.obj: main.cpp
+ $(CC) -I$(INCPATH) $(BCC_OPT) main.cpp
+
+graph.obj: graph.cpp
+ $(CC) -I$(INCPATH) $(BCC_OPT) graph.cpp
+
+sb.obj: sb.cpp
+ $(CC) -I$(INCPATH) -c -mt -u- sb.cpp
+
+symgen.obj: symgen.cpp
+ $(CC) -I$(INCPATH) -c -mt -u- -O2 symgen.cpp

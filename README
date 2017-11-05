@@ -1,0 +1,10 @@
+﻿Исходный код эмулятора Emu80 v. 2.86 для ОС DOS и утилит.
+http://emu80.org
+
+For license info, see the file "COPYING"
+
+Для компиляции эмулятора требуются компилятор Borland C++ и Turbo Assembler версии 3.1.
+
+Сборка под DOS:
+ - cd SRC
+ - make
